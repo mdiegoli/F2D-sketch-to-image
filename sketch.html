@@ -185,7 +185,7 @@
 				prev_point=pointOf;
 				prev_radius=progressiveRadius;
 			}
-			if(path.type == null || path.type.indexOf('closed') == 0) progressiveRadius += radiusStep;
+			if(path.type == null || path.type.indexOf('closed') == -1) progressiveRadius += radiusStep;
 		}
 		//}
 	}
