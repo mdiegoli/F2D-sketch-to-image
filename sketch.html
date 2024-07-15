@@ -185,7 +185,9 @@
 				prev_point=pointOf;
 				prev_radius=progressiveRadius;
 			}
+			//if path is closed, I'll draw a sort of thorus. Else...
 			if(path.type == null || path.type.indexOf('closed') == -1) progressiveRadius += radiusStep;
+			else progressiveRadius = radius;
 		}
 		//}
 	}
