@@ -176,7 +176,9 @@
 				prev_radius = progressiveRadius;
 			}else{
 				//comment show only stroke
+				//if path.type == 'tentacle'...
 				drawTangents(prev_point.x,prev_point.y,prev_radius,pointOf.x,pointOf.y,progressiveRadius);
+				//else if type ...
 				prev_point=pointOf;
 				prev_radius=progressiveRadius;
 			}
