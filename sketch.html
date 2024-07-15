@@ -69,7 +69,7 @@
 			}
 			if (intersect){
 				path.strokeColor='#ff0000'
-				//path.type='closed'
+				path.type='closed'
 			}	
 		}
 		
@@ -185,7 +185,7 @@
 				prev_point=pointOf;
 				prev_radius=progressiveRadius;
 			}
-			progressiveRadius += radiusStep;
+			if(path.type == null && path.type.indexOf('closed') == 0) progressiveRadius += radiusStep;
 		}
 		//}
 	}
