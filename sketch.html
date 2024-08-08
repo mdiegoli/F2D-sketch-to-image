@@ -176,7 +176,7 @@
 			});
 			if(!prev_point && !prev_radius){
 				prev_point = pointOf;
-				prev_radius = progressiveRadius;
+				prev_radius = (path.type == null || path.type.indexOf('closed') == -1) ? progressiveRadius : radius;
 			}else{
 				//comment show only stroke
 				//if path.type == 'tentacle'...
