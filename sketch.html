@@ -149,7 +149,36 @@
 				}
 			}
 		}
-
+		if(minuxToggle) styleStrokeMag();
+		else styleStrokeMinus();
+	}
+	tool.onMouseDrag = function(event){
+		if(draw){
+			path.add(event.point);
+		}else{
+			if (segment) {
+				segment.point += event.delta;
+				path.smooth();
+			} else if (path) {
+				path.position += event.delta;
+			}
+		}
+		
+	}
+	var minuxToggle = false;
+	tool.onKeyDown = function(event){
+		if(event.key == 'space'){
+			minuxToggle = !minuxToggle
+			
+		}
+	}
+	function styleStrokeMinus(){
+		styleStroke(20,20,true);
+	}
+	function styleStrokeMag(){
+		styleStroke(20,20,false);
+	}
+	function styleStroke(numparts,rad,min){
 		var curves = path.curves;
 		var numParts = 20;
 		var pathLength = path.length;
@@ -158,6 +187,7 @@
 		var radius = 20;
 		var radiusStep = radius/numParts;
 		var progressiveRadius = radiusStep;
+		if(min) progressiveRadius = radius;
 		//for(var ic = 0; ic < curves.length;ic++) {
 		//	var c = curves[ic];
 		var prev_point;
@@ -186,25 +216,11 @@
 				prev_radius=progressiveRadius;
 			}
 			//if path is closed, I'll draw a sort of thorus. Else...
-			if(path.type == null || path.type.indexOf('closed') == -1) progressiveRadius += radiusStep;
+			if(path.type == null || path.type.indexOf('closed') == -1) if(min) progressiveRadius -= radiusStep; else progressiveRadius += radiusStep;
 			else progressiveRadius = radius;
 		}
 		//}
 	}
-	tool.onMouseDrag = function(event){
-		if(draw){
-			path.add(event.point);
-		}else{
-			if (segment) {
-				segment.point += event.delta;
-				path.smooth();
-			} else if (path) {
-				path.position += event.delta;
-			}
-		}
-		
-	}
-	
 	function drawTangents(x,y,r,x2,y2,r2){
 		var points = getTangents(x, y, r, x2, y2, r2);
 		var points_length = points.length;
